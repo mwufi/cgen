@@ -6,7 +6,9 @@ function ChatPanel() {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
-  const handleSendMessage = () => {
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+
     if (inputValue.trim() !== "") {
       setMessages([...messages, inputValue]);
       setInputValue("");
@@ -39,7 +41,7 @@ function ChatPanel() {
         ))}
       </div>
       <div className="border-t p-4">
-        <div className="flex space-x-2">
+        <form className="flex space-x-2" onSubmit={handleSendMessage}>
           <input
             type="text"
             className="flex-grow rounded p-2 border"
@@ -53,7 +55,7 @@ function ChatPanel() {
           >
             Send
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
