@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 function ChatPanel() {
   const [messages, setMessages] = useState([]);
@@ -60,8 +60,60 @@ function ChatPanel() {
     </div>
   );
 }
+function Iframe({contents}) {
+  const iframeRef = useRef(null);
+
+  useEffect(() => {
+    if(iframeRef.current === null) return;
+
+    const iframeContentWindow = iframeRef.current.contentWindow;
+
+    const script1 = document.createElement("script");
+    script1.src = "https://unpkg.com/react@17/umd/react.development.js";
+    script1.type = "text/javascript";
+    iframeContentWindow.document.head.appendChild(script1);
+
+    const script2 = document.createElement("script");
+    script2.src = "https://unpkg.com/react-dom@17/umd/react-dom.development.js";
+    script2.type = "text/javascript";
+    iframeContentWindow.document.head.appendChild(script2);
+
+    // Load TailwindCSS
+    const tailwindLink = document.createElement("link");
+    tailwindLink.href = "https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css";
+    tailwindLink.rel = "stylesheet";
+    iframeContentWindow.document.head.appendChild(tailwindLink);
+
+    // Add more scripts or styles if needed
+
+    script2.onload = () => {
+      iframeContentWindow.ReactDOM.render(
+        iframeContentWindow.React.createElement(
+          "div",
+          { className: "px-4 bg-blue-100" },
+          contents || "Calendar content goes here or the Calendar component itself",
+        ),
+        iframeRef.current.contentDocument.body,
+      );
+    };
+  }, []);
+
+  return (
+    <iframe
+      ref={iframeRef}
+      style={{ width: "100%", height: "400px", border: "none" }}
+    ></iframe>
+  );
+}
 
 export default function TwoColumnLayout() {
+  const contentz = `<div className="flex h-screen">
+{/* Chat Panel */}
+<div className="flex-1 bg-red-200 p-4 overflow-y-auto">
+hello world
+</div>
+</div>`;
+
   return (
     <div className="flex h-screen">
       {/* Chat Panel */}
@@ -71,10 +123,7 @@ export default function TwoColumnLayout() {
 
       {/* Iframe Panel */}
       <div className="flex-1 p-4">
-        <iframe
-          src="https://example.com"
-          className="w-full h-full border-none"
-        ></iframe>
+        <Iframe contents={contentz} />
       </div>
     </div>
   );
