@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import { SendHorizonal } from "lucide-react";
+import { Checkbox } from "~/components/ui/checkbox";
 
 function ChatPanel({ onSubmit }) {
   const [messages, setMessages] = useState([]);
@@ -53,6 +54,8 @@ function ChatPanel({ onSubmit }) {
   );
 }
 
+const scope = { Checkbox };
+
 export default function TwoColumnLayout() {
   const [contentz, setContentz] = useState(`<div className="flex flex-col">
     <div>this editor ... smh</div>
@@ -60,7 +63,7 @@ export default function TwoColumnLayout() {
     </div>`);
 
   const callAI = (data) => {
-    fetch("/api/completion", {
+    fetch("/api/ai", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -87,7 +90,7 @@ export default function TwoColumnLayout() {
 
       {/* Iframe Panel */}
       <div className="flex-1 p-4 flex flex-col">
-        <LiveProvider code={contentz}>
+        <LiveProvider code={contentz} scope={scope}>
           <LiveEditor />
           <LiveError />
           <div className="py-4">
