@@ -7,9 +7,8 @@ const VideoPlayer = ({ videoSrcURL }) => {
       <iframe
         src={videoSrcURL}
         title="Course Preview"
-        frameborder="0"
         allow="autoplay; fullscreen"
-        className="w-full h-full"
+        className="w-full h-full min-h-[300px]"
       />
     </div>
   );

@@ -6,7 +6,8 @@ import CourseOutline from "./CourseOutline";
 import Testimonial from "./Testimonial";
 
 const LandingPage = () => {
-  const videoSrcURL = "https://www.examplevideourl.com";
+  const videoSrcURL =
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
   const overviewText = "This course...";
   const testimonialText =
     "A transformative journey through the art and science of goal setting. An absolute must-watch!";
