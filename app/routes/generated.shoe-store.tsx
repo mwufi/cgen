@@ -1,7 +1,7 @@
-import Header from "~/components/ai-generated/Header";
-import ProductCard from "~/components/ai-generated/ProductCard";
-import CallToAction from "~/components/ai-generated/CallToAction";
-import Footer from "~/components/ai-generated/Footer";
+import Header from "~/components/ai-generated/shoe-store/Header";
+import ProductCard from "~/components/ai-generated/shoe-store/ProductCard";
+import CallToAction from "~/components/ai-generated/shoe-store/CallToAction";
+import Footer from "~/components/ai-generated/shoe-store/Footer";
 
 export default function LandingPage() {
   // Example product data (this might come from API or static data)
